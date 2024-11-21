@@ -3,7 +3,7 @@
     height: 85%;
     left: 50%;
     top: 50%;
-    position: absolute;
+    position: fixed;
     transform: translate(-50%, -50%);
     background-color: grey;
     border-radius: 3vw;
