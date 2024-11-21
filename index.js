@@ -25,8 +25,13 @@ wss.onopen = (event) => {
   wss.send(JSON.stringify({"action": "sendName", "name": getName("Name: ")}))
 }
 wss.onclose = (event) => {
+  var ele = document.createElement("div")
+    var elem = document.querySelector("#messages");
+    ele.className = "message sysmessage"
+    ele.innerHTML = "You were kicked from the chat.";
+    elem.appendChild(ele)
+    elem.scrollTop = elem.scrollHeight;
   alert("You have been kicked from the chat.");
-  window.location.href="about:blank";
 }
 wss.onmessage = (event) => {
   var data = JSON.parse(event.data);
