@@ -6,7 +6,7 @@ const actionLimit = 10;
 var personlist = {};
 var name = "";
 var privateMessages = {};
-var wss = new WebSocket("ws://localhost:8080");
+var wss = new WebSocket("wss://640cb426-8223-4e80-b1f1-a3a552e3bac6-00-ckhe8xog1pbr.worf.replit.dev");
 document.querySelector("#msgbox").onkeyup = function(key) {
   if(key.key == "Enter") {
     const now = Date.now();
