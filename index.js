@@ -1,9 +1,27 @@
+//cooldown vars
+const actionTimestamps = [];
+const cooldownTime = 5000;
+const actionLimit = 10;
+//end cooldown section
 var personlist = {};
 var name = "";
 var privateMessages = {};
 var wss = new WebSocket("wss://chatwss.smileyzone.net");
 document.querySelector("#msgbox").onkeyup = function(key) {
   if(key.key == "Enter") {
+    const now = Date.now();
+    while (actionTimestamps.length > 0 && actionTimestamps[0] <= now - cooldownTime) {
+        actionTimestamps.shift();
+    }
+    actionTimestamps.push(now);
+    if (actionTimestamps.length >= actionLimit) {
+        console.log("Cooldown activated! Too many actions.");
+        setTimeout(() => {
+            console.log("Cooldown ended.");
+            actionTimestamps.length = 0;
+        }, cooldownTime);
+        return;
+    }
     wss.send(JSON.stringify({"action": "sendMessage", "message": document.querySelector("#msgbox").value, "sender": name}))
     document.querySelector("#msgbox").value="";
   }
