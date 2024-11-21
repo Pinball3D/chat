@@ -6,7 +6,7 @@ const actionLimit = 10;
 var personlist = {};
 var name = "";
 var privateMessages = {};
-var wss = new WebSocket("wss://chatwss.smileyzone.net");
+var wss = new WebSocket("ws://localhost:8080");
 document.querySelector("#msgbox").onkeyup = function(key) {
   if(key.key == "Enter") {
     const now = Date.now();
@@ -15,9 +15,9 @@ document.querySelector("#msgbox").onkeyup = function(key) {
     }
     actionTimestamps.push(now);
     if (actionTimestamps.length >= actionLimit) {
-        console.log("Cooldown activated! Too many actions.");
+        alert("Cooldown activated!");
         setTimeout(() => {
-            console.log("Cooldown ended.");
+            alert("Cooldown ended.");
             actionTimestamps.length = 0;
         }, cooldownTime);
         return;
