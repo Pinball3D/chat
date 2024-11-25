@@ -13,6 +13,9 @@ function reloadWebsite() {
       console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
     })
     .catch(error => {
+        if (response.status == 526) {
+            console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
+        }
       console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
     });
 }
