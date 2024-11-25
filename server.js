@@ -3,6 +3,21 @@ const wss = new WebSocket.Server({ port: 8080 });
 var conns = [];
 var people = [];
 console.log('WebSocket server is running on ws://localhost:8080');
+const url = `https://chat-backend-hdl3.onrender.com/`; // Replace with your Render URL
+const interval = 30000; // Interval in milliseconds (30 seconds)
+
+function reloadWebsite() {
+  axios.get(url)
+    .then(response => {
+      console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
+    })
+    .catch(error => {
+      console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
+    });
+}
+
+
+setInterval(reloadWebsite, interval);
 function sendPeople() {
     var names = [];
     people.forEach(e => {
