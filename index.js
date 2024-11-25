@@ -6,7 +6,7 @@ const actionLimit = 5;
 var personlist = {};
 var name = "";
 var privateMessages = {};
-var wss = new WebSocket("ws://localhost:8080");
+var wss = new WebSocket("wss://chatwss.smileyzone.net");
 document.querySelector("#msgbox").onkeyup = function(key) {
   if(key.key == "Enter") {
     const now = Date.now();
