@@ -16,6 +16,7 @@ function reloadWebsite() {
       console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
     });
 }
+reloadWebsite();
 setInterval(reloadWebsite, interval);
 //END KEEP ALIVE
 function sendPeople() {
