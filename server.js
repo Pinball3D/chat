@@ -23,11 +23,17 @@ wss.on('connection', (ws) => {
     conns.push(ws);
     console.log('A new client connected.');
     ws.on('message', (message) => {
+        ws.send(JSON.stringify({"sender": "MEMBERS", "message": names}))
         let json = JSON.parse(message)
         console.log(json)
         if (json["action"] == "sendName") {
             people.push({"name": json["name"], "socket": ws});
             sendPeople()
+            broadcast(JSON.stringify({
+                "sender": "SYSTEM",
+                "message": json["name"] + " has joined the chat",
+                "type": "public"
+            }))
         } else if (json["action"] == "sendMessage") {
             broadcast(JSON.stringify({"sender": "MESSAGE", "message": json["message"], "sender": json["sender"], "type": "public"}))
         }

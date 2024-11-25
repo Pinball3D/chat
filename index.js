@@ -1,12 +1,12 @@
 //cooldown vars
 const actionTimestamps = [];
 const cooldownTime = 5000;
-const actionLimit = 10;
+const actionLimit = 5;
 //end cooldown section
 var personlist = {};
 var name = "";
 var privateMessages = {};
-var wss = new WebSocket("wss://640cb426-8223-4e80-b1f1-a3a552e3bac6-00-ckhe8xog1pbr.worf.replit.dev:80");
+var wss = new WebSocket("ws://localhost:8080");
 document.querySelector("#msgbox").onkeyup = function(key) {
   if(key.key == "Enter") {
     const now = Date.now();
@@ -15,12 +15,14 @@ document.querySelector("#msgbox").onkeyup = function(key) {
     }
     actionTimestamps.push(now);
     if (actionTimestamps.length >= actionLimit) {
-        alert("Cooldown activated!");
-        setTimeout(() => {
-            alert("Cooldown ended.");
-            actionTimestamps.length = 0;
-        }, cooldownTime);
-        return;
+      document.querySelector("#msgbox").placeholder = "Too many messages!"
+      alert("Cooldown activated!");
+      setTimeout(() => {
+        document.querySelector("#msgbox").placeholder = "Send a message..."
+        alert("Cooldown ended.");
+        actionTimestamps.length = 0;
+      }, 10000);
+      return;
     }
     wss.send(JSON.stringify({"action": "sendMessage", "message": document.querySelector("#msgbox").value, "sender": name}))
     document.querySelector("#msgbox").value="";

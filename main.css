@@ -81,11 +81,13 @@
     position: fixed;
     left: 25%;
     bottom: 0%;
-    height: 1.25vw;
+    height: 1.75vw;
     width: 75%;
     border-style: solid solid none solid;
     border-width: 2px;
-    border-color: black
+    border-color: black;
+    font-size: 1.5vw;
+    outline-width: 0;
   }
   #messages {
     position: fixed;
