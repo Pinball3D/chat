@@ -23,6 +23,11 @@ wss.on('connection', (ws) => {
     conns.push(ws);
     console.log('A new client connected.');
     ws.on('message', (message) => {
+        var names = [];
+        people.forEach(e => {
+            names.push(e["name"])
+        
+        });
         ws.send(JSON.stringify({"sender": "MEMBERS", "message": names}))
         let json = JSON.parse(message)
         console.log(json)
