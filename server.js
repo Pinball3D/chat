@@ -1,11 +1,12 @@
 const WebSocket = require('ws');
+const axios = require('axios');
 const wss = new WebSocket.Server({ port: 8080 });
 var conns = [];
 var people = [];
 console.log('WebSocket server is running on ws://localhost:8080');
+//KEEP ALIVE
 const url = `https://chat-backend-hdl3.onrender.com/`; // Replace with your Render URL
 const interval = 30000; // Interval in milliseconds (30 seconds)
-
 function reloadWebsite() {
   axios.get(url)
     .then(response => {
@@ -15,9 +16,8 @@ function reloadWebsite() {
       console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
     });
 }
-
-
 setInterval(reloadWebsite, interval);
+//END KEEP ALIVE
 function sendPeople() {
     var names = [];
     people.forEach(e => {
