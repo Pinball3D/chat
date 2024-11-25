@@ -127,7 +127,12 @@ function evalName(name) {
 function addPerson(name) {
   privateMessages[name] = [];
   var div = document.createElement("div")
-  div.innerHTML = name;
+  if (self.name == name) {
+    div.innerHTML = name+" (You)";
+  } else {
+    div.innerHTML = name;
+  }
+  
   div.className = "person";
   div.dataset.name = name;
   div.addEventListener("click", privateClick);
