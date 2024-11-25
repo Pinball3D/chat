@@ -13,10 +13,11 @@ function reloadWebsite() {
       console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
     })
     .catch(error => {
-        if (response.status == 526) {
-            console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
+        if (error.status == 426) {
+            console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${error.status}`);
+        } else {
+            console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
         }
-      console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
     });
 }
 reloadWebsite();
